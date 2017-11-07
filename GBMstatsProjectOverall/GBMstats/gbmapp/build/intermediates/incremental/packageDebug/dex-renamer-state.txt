@@ -1,0 +1,7 @@
+#Fri Oct 06 01:33:51 EDT 2017
+base.0=C\:\\Users\\Chigozie\\AndroidStudioProjects\\GBMstats\\gbmapp\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_a8646854109f8bd2ab30584058ce11e5be386265
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=C\:\\Users\\Chigozie\\AndroidStudioProjects\\GBMstats\\gbmapp\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_994aab0e9c0f20868c7020cdebc9db66f031eacd\\classes.dex
+base.1=C\:\\Users\\Chigozie\\AndroidStudioProjects\\GBMstats\\gbmapp\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_994aab0e9c0f20868c7020cdebc9db66f031eacd
+file.0=C\:\\Users\\Chigozie\\AndroidStudioProjects\\GBMstats\\gbmapp\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_a8646854109f8bd2ab30584058ce11e5be386265\\classes.dex

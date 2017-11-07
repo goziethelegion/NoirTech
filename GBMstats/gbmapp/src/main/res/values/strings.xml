@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">GBMstats</string>
+    <string name="login_app">Login</string>
+    <string name="signup_app">Signup</string>
+    <string name="menu_app">Menu</string>
+    <string name="enteremail">Email</string>
+    <string name="scan_app">Scanner</string>
+    <string name="setting_app">Settings</string>
+    <string name="action_settings">Settings</string>
+    <string name="passforgot">Forgotten Password</string>
+    <string name="tab_text_1">CCTV SURVEILLANCE</string>
+    <string name="tab_text_2">WEATHER STATISTICS</string>
+    <string name="tab_text_3">FACIAL/FINGERPRINT SCANNER</string>
+</resources>
