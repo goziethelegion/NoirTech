@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ca.humber.gbmstats">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -40,19 +41,31 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/setting_app"
-            android:parentActivityName=".MenuActivity"
+            android:label="@string/action_settings"
+            android:parentActivityName=".Menu2Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ForgotPassActivity" />
+        <activity
+            android:name=".ForgotPassActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Menu2Activity"
             android:label="@string/menu_app"
-            android:screenOrientation="portrait"
             android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ca.humber.gbmstats.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".Settings2Activity"
+            android:label="@string/title_activity_settings2"
+            android:parentActivityName=".Menu2Activity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.humber.gbmstats.Menu2Activity" />
         </activity>
     </application>
 

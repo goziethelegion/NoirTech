@@ -4,7 +4,17 @@
     tools:context="ca.humber.gbmstats.Menu2Activity">
     <item
         android:id="@+id/action_settings"
+        android:enabled="true"
         android:orderInCategory="100"
         android:title="@string/action_settings"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_login"
+        android:enabled="true"
+        android:orderInCategory="100"
+        android:title="@string/action_logout"
+        android:visible="true"
         app:showAsAction="never" />
 </menu>

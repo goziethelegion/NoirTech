@@ -2,6 +2,7 @@ package ca.humber.gbmstats;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+//redundant activity
 
 public class SettingsActivity extends AppCompatActivity {
 

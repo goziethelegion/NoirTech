@@ -1,29 +1,54 @@
 package ca.humber.gbmstats;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+
 public class LoginActivity extends AppCompatActivity {
 
     private Button loginbutton2;
-    public EditText usrname;
+    public EditText usrnametext, passwdtext;
     private TextView link;
+    private String usrnametex, passwdtex;
 
     public void Loginmethod2() {
-        usrname = (EditText) findViewById(R.id.usrnametext);
+        usrnametext = (EditText) findViewById(R.id.usrnametext);
 
         loginbutton2 = (Button) findViewById(R.id.loginbutton2);
         loginbutton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Intent login2 = new Intent(LoginActivity.this, Menu2Activity.class);
-                login2.putExtra("name",usrname.getText().toString());
-                startActivity(login2);
+                usrnametex = usrnametext.getText().toString();
+                passwdtex = passwdtext.getText().toString();
+
+                new LoginBackgroundTasks(LoginActivity.this).execute();
             }
         });
     }
@@ -46,5 +71,207 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Loginmethod2();
         Linkmethod();
+
+        usrnametext = (EditText) findViewById(R.id.usrnametext);
+        passwdtext = (EditText) findViewById(R.id.passwdtext);
+
+    }
+    class LoginBackgroundTasks extends AsyncTask<String, Void, String>
+    {
+        String json_url;
+        String JSON_STRING;
+        Context ctx;
+        AlertDialog.Builder builder;
+        private Activity activity;
+        private AlertDialog loginDialog;
+
+        public LoginBackgroundTasks(Context ctx)
+        {
+            this.ctx = ctx;
+            activity = (Activity) ctx;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            builder = new AlertDialog.Builder(ctx);
+            View dialogView = LayoutInflater.from(this.ctx).inflate(R.layout.progressdialog, null);
+            ((TextView) dialogView.findViewById(R.id.tprogressdialog)).setText("Please wait...");
+            loginDialog = builder.setView(dialogView).setCancelable(false).show();
+            json_url = "http://partscribdatabase.tech/gbmstats/login.php";
+        }
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+            try
+            {
+                URL url = new URL(json_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream os = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+
+                String data =
+                        URLEncoder.encode("username", "UTF-8") + "=" +
+                                URLEncoder.encode(usrnametex, "UTF-8") + "&" +
+                                URLEncoder.encode("password", "UTF-8") + "=" +
+                                URLEncoder.encode(passwdtex, "UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                os.close();
+                InputStream is = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null)
+                {
+                    stringBuilder.append(line + "\n");
+                }
+                bufferedReader.close();
+                is.close();
+                httpURLConnection.disconnect();
+                return stringBuilder.toString().trim();
+            }
+            catch (MalformedURLException e)
+            {
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values)
+        {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String result)
+        {
+            loginDialog.dismiss();
+            if(TextUtils.isEmpty(result))
+            {
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ctx);
+                builder.setMessage("Connection Error.");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();
+                        new LoginActivity.LoginBackgroundTasks(ctx).execute();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();
+                    }
+                });
+                android.support.v7.app.AlertDialog alert = builder.create();
+                alert.show();
+            }
+            else
+            {
+                try
+                {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONArray jsonArray = jsonObject.getJSONArray("server_response");
+                    JSONObject JO = jsonArray.getJSONObject(0);
+
+                    String message = JO.getString("message");
+                    String code = JO.getString("code");
+
+                    if (code.equals("login_true"))
+                    {
+                        Intent login2 = new Intent(LoginActivity.this, Menu2Activity.class);
+                        login2.putExtra("name",usrnametex);
+                        startActivity(login2);
+                    }
+                    else if (code.equals("login_false"))
+                    {
+                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ctx);
+                        builder.setTitle("Something went wrong!");
+                        builder.setMessage(message);
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                dialog.dismiss();
+                                new LoginActivity.LoginBackgroundTasks(ctx).execute();
+                            }
+                        });
+                        builder.setNegativeButton("CLOSE", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                dialog.dismiss();
+                            }
+                        });
+                        android.support.v7.app.AlertDialog alert = builder.create();
+                        alert.show();
+                    }
+                    else
+                    {
+                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ctx);
+                        builder.setTitle("Unidentified Error Occurred");
+                        builder.setMessage("Please try again.");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                dialog.dismiss();
+                                new LoginActivity.LoginBackgroundTasks(ctx).execute();
+                            }
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                dialog.dismiss();
+                            }
+                        });
+                        android.support.v7.app.AlertDialog alert = builder.create();
+                        alert.show();
+                    }
+                }
+                catch (JSONException e)
+                {
+                    android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ctx);
+                    builder.setTitle("Unknown Application Error Occurred");
+                    builder.setMessage("Please try again.");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.dismiss();
+                            new LoginActivity.LoginBackgroundTasks(ctx).execute();
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.dismiss();
+                        }
+                    });
+                    android.support.v7.app.AlertDialog alert = builder.create();
+                    alert.show();
+                }
+            }
+        }
     }
 }

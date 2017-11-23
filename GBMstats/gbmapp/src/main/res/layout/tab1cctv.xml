@@ -4,7 +4,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.humber.gbmstats.Menu2Activity$PlaceholderFragment"
+    tools:context="ca.humber.gbmstats.Menu2Activity"
     android:background="#1A2421">
 
     <TextView
@@ -13,13 +13,5 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textColor="#FFFFFF"/>
-
-    <Button
-        android:id="@+id/settingsbutton"
-        android:layout_width="50sp"
-        android:layout_height="50sp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:background="@mipmap/settings" />
 
 </RelativeLayout>

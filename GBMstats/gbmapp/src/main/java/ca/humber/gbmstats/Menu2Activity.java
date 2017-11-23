@@ -74,10 +74,17 @@ public class Menu2Activity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        int log = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent sett = new Intent(Menu2Activity.this, Settings2Activity.class);
+            startActivity(sett);
+        }
+
+        if (log == R.id.action_login){
+            Intent sett2 = new Intent(Menu2Activity.this, GBMActivity.class);
+            startActivity(sett2);
         }
 
         return super.onOptionsItemSelected(item);
