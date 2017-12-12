@@ -1,4 +1,5 @@
 package ca.humber.gbmstats;
+//redundant activity - previously to be developed by Bradey who dropped the course
 
 /**
  * Created by Chigozie on 11/7/2017.

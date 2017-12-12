@@ -1,4 +1,5 @@
 package ca.humber.gbmstats;
+//GBMstats
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,6 +31,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignupActivity extends AppCompatActivity {
     private Button nextbutton;
@@ -64,46 +67,72 @@ public class SignupActivity extends AppCompatActivity {
                     editpassw = editpasswd.getText().toString();
                     editusernam = editusername.getText().toString();
 
-                    if(!editpassw.equals(editconfir))
-                    {
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
-                        alertDialogBuilder.setTitle("Invalid Password");
-                        alertDialogBuilder.setMessage("Password and Confirm Password must match!");
-                        alertDialogBuilder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
+                    if (editusernam.equals("") && editpassw.equals("") && editconfir.equals("") &&
+                            lnam.equals("") && fnam.equals("") && editemai.equals("")) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle(getString(R.string.empty));
+                        builder.setMessage(getString(R.string.enterinfo));
+                        builder.setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
                             }
                         });
-                        AlertDialog alertDialog = alertDialogBuilder.create();
-                        alertDialog.show();
+                        AlertDialog alert = builder.create();
+                        alert.show();
                     }
-                    else
-                    {
-                        if (!((editpassw.length() >= 6) && (editpassw.length() <= 12)))
-                        {
-                            AlertDialog.Builder alertDialogBuilder1 = new AlertDialog.Builder(context);
+                        else {
+                            if (!editpassw.equals(editconfir)) {
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
-                            alertDialogBuilder1.setTitle("Invalid Password");
-                            alertDialogBuilder1.setMessage("Password must be greater than 5 characters and less than 12 characters!");
-                            alertDialogBuilder1.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.cancel();
+                                alertDialogBuilder.setTitle(getString(R.string.passinvalid));
+                                alertDialogBuilder.setMessage(R.string.passmatch);
+                                alertDialogBuilder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                });
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+                                alertDialog.show();
+                            } else {
+                                if (!((editpassw.length() >= 6) && (editpassw.length() <= 12))) {
+                                    AlertDialog.Builder alertDialogBuilder1 = new AlertDialog.Builder(context);
+
+                                    alertDialogBuilder1.setTitle(getString(R.string.passinvalid));
+                                    alertDialogBuilder1.setMessage(getString(R.string.passnumber));
+                                    alertDialogBuilder1.setNegativeButton(getString(R.string.close), new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                        }
+                                    });
+                                    AlertDialog alertDialog1 = alertDialogBuilder1.create();
+                                    alertDialog1.show();
+                                } else {
+                                    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                                    if (!editemai.matches(emailPattern)) {
+                                        AlertDialog.Builder alertDialogBuilder2 = new AlertDialog.Builder(context);
+
+                                        alertDialogBuilder2.setTitle(getString(R.string.emailinvalid));
+                                        alertDialogBuilder2.setMessage(getString(R.string.entervalidemail));
+                                        alertDialogBuilder2.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.cancel();
+                                            }
+                                        });
+                                        AlertDialog alertDialog2 = alertDialogBuilder2.create();
+                                        alertDialog2.show();
+                                    } else {
+                                        new SignupBackgroundTasks(SignupActivity.this).execute();
+                                    }
                                 }
-                            });
-                            AlertDialog alertDialog1 = alertDialogBuilder1.create();
-                            alertDialog1.show();
+                            }
                         }
-                        else
-                        {
-                            new SignupBackgroundTasks(SignupActivity.this).execute();
-                        }
-                    }
                 }
             });
     }
+
     class SignupBackgroundTasks extends AsyncTask<String, Void, String>
     {
         String json_url;
@@ -128,9 +157,9 @@ public class SignupActivity extends AppCompatActivity {
         {
             builder = new AlertDialog.Builder(ctx);
             View dialogView = LayoutInflater.from(this.ctx).inflate(R.layout.progressdialog, null);
-            ((TextView) dialogView.findViewById(R.id.tprogressdialog)).setText("Please wait...");
+            ((TextView) dialogView.findViewById(R.id.tprogressdialog)).setText(getString(R.string.wait));
             loginDialog = builder.setView(dialogView).setCancelable(false).show();
-            json_url = "http://partscribdatabase.tech/gbmstats/registerstudent.php";
+            json_url = getString(R.string.website2);
         }
 
         @Override
@@ -198,10 +227,10 @@ public class SignupActivity extends AppCompatActivity {
             loginDialog.dismiss();
             if(TextUtils.isEmpty(result))
             {
-                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ctx);
-                builder.setMessage("Connection Error.");
+                AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+                builder.setMessage(getString(R.string.errconnection));
                 builder.setCancelable(false);
-                builder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+                builder.setPositiveButton(getString(R.string.retry), new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int which)
                     {
@@ -209,14 +238,14 @@ public class SignupActivity extends AppCompatActivity {
                         new SignupBackgroundTasks(ctx).execute();
                     }
                 });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                builder.setNegativeButton(getString(R.string.close), new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int which)
                     {
                         dialog.dismiss();
                     }
                 });
-                android.support.v7.app.AlertDialog alert = builder.create();
+                AlertDialog alert = builder.create();
                 alert.show();
             }
             else
@@ -232,11 +261,11 @@ public class SignupActivity extends AppCompatActivity {
 
                     if (code.equals("reg_true"))
                     {
-                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ctx);
-                        builder.setTitle("Signed up");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+                        builder.setTitle(getString(R.string.signup));
                         builder.setMessage(message);
                         builder.setCancelable(false);
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                        builder.setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener()
                         {
                             public void onClick(DialogInterface dialog, int which)
                             {
@@ -247,18 +276,19 @@ public class SignupActivity extends AppCompatActivity {
                                 lname.setText("");
                                 editemail.setText("");
                                 editconfirm.setText("");
+                            finish();
                             }
                         });
-                        android.support.v7.app.AlertDialog alert = builder.create();
+                        AlertDialog alert = builder.create();
                         alert.show();
                     }
                     else if (code.equals("reg_false"))
                     {
-                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ctx);
-                        builder.setTitle("Something went wrong!");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+                        builder.setTitle(getString(R.string.err));
                         builder.setMessage(message);
                         builder.setCancelable(false);
-                        builder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+                        builder.setPositiveButton(getString(R.string.retry), new DialogInterface.OnClickListener()
                         {
                             public void onClick(DialogInterface dialog, int which)
                             {
@@ -266,23 +296,23 @@ public class SignupActivity extends AppCompatActivity {
                                 new SignupBackgroundTasks(ctx).execute();
                             }
                         });
-                        builder.setNegativeButton("CLOSE", new DialogInterface.OnClickListener()
+                        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener()
                         {
                             public void onClick(DialogInterface dialog, int which)
                             {
                                 dialog.dismiss();
                             }
                         });
-                        android.support.v7.app.AlertDialog alert = builder.create();
+                        AlertDialog alert = builder.create();
                         alert.show();
                     }
                     else
                     {
                         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ctx);
-                        builder.setTitle("Unidentified Error Occurred");
-                        builder.setMessage("Please try again.");
+                        builder.setTitle(getString(R.string.err));
+                        builder.setMessage(getString(R.string.retry1));
                         builder.setCancelable(false);
-                        builder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+                        builder.setPositiveButton(getString(R.string.retry), new DialogInterface.OnClickListener()
                         {
                             public void onClick(DialogInterface dialog, int which)
                             {
@@ -290,7 +320,7 @@ public class SignupActivity extends AppCompatActivity {
                                 new SignupBackgroundTasks(ctx).execute();
                             }
                         });
-                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                        builder.setNegativeButton(getString(R.string.close), new DialogInterface.OnClickListener()
                         {
                             public void onClick(DialogInterface dialog, int which)
                             {
@@ -303,11 +333,11 @@ public class SignupActivity extends AppCompatActivity {
                 }
                 catch (JSONException e)
                 {
-                    android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ctx);
-                    builder.setTitle("Unknown Application Error Occurred");
-                    builder.setMessage("Please try again.");
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+                    builder.setTitle(getString(R.string.err));
+                    builder.setMessage(getString(R.string.retry1));
                     builder.setCancelable(true);
-                    builder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+                    builder.setPositiveButton(getString(R.string.retry), new DialogInterface.OnClickListener()
                     {
                         public void onClick(DialogInterface dialog, int which)
                         {
@@ -315,14 +345,14 @@ public class SignupActivity extends AppCompatActivity {
                             new SignupBackgroundTasks(ctx).execute();
                         }
                     });
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                    builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener()
                     {
                         public void onClick(DialogInterface dialog, int which)
                         {
                             dialog.dismiss();
                         }
                     });
-                    android.support.v7.app.AlertDialog alert = builder.create();
+                    AlertDialog alert = builder.create();
                     alert.show();
                 }
             }

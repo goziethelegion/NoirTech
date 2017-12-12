@@ -1,9 +1,9 @@
 package ca.humber.gbmstats;
+//GBMstats
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -12,12 +12,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.TextView;
 
 public class Menu2Activity extends AppCompatActivity {
@@ -36,15 +35,28 @@ public class Menu2Activity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private TextView textviewer;
+    private String usrname;
+    BluetoothAdapter bluetoothAdapter;
+    private Button bluetthbutn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu2);
 
+        User user = UserSessionManager.getInstance(this).getUser();
+
+        textviewer = (TextView) findViewById(R.id.textviewer);
+        Intent login2 = this.getIntent();
+        textviewer.setVisibility(View.VISIBLE);
+
+        usrname = login2.getStringExtra("name");
+        textviewer.setText(usrname);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -59,7 +71,6 @@ public class Menu2Activity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,16 +89,20 @@ public class Menu2Activity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent sett = new Intent(Menu2Activity.this, Settings2Activity.class);
+            Intent sett = new Intent(Menu2Activity.this, SettingsActivity.class);
             startActivity(sett);
         }
 
-        if (log == R.id.action_login){
-            Intent sett2 = new Intent(Menu2Activity.this, GBMActivity.class);
-            startActivity(sett2);
+        if (log == R.id.action_logout){
+            //new UserSessionManager(Menu2Activity.this).removeUser();
+            finish();
+            UserSessionManager.getInstance(getApplicationContext()).logout();
+            Intent login = new Intent(this, LoginActivity.class);
+            login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(login);
         }
 
-        return super.onOptionsItemSelected(item);
+            return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -107,9 +122,6 @@ public class Menu2Activity extends AppCompatActivity {
                     tab1cctv tab1 = new tab1cctv();
                     return tab1;
                 case 1:
-                    tab2weather tab2 = new tab2weather();
-                    return tab2;
-                case 2:
                     tab3scan tab3 = new tab3scan();
                     return tab3;
                 default:
@@ -119,19 +131,17 @@ public class Menu2Activity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 2 total pages.
+            return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int position){
             switch (position){
                 case 0:
-                    return "CCTV";
+                    return getString(R.string.cctv);
                 case 1:
-                    return "WEATHER STATISTICS";
-                case 2:
-                    return "FACIAL/FINGERPRINT SCAN";
+                    return getString(R.string.tab_text_3);
             }
             return null;
         }

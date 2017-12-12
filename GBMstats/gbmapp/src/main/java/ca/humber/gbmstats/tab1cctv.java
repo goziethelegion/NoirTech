@@ -1,4 +1,5 @@
 package ca.humber.gbmstats;
+//GBMstats
 
 /**
  * Created by Chigozie on 11/7/2017.
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 public class tab1cctv extends Fragment{
 
+    //The implementation for the CCTV camera would go here
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

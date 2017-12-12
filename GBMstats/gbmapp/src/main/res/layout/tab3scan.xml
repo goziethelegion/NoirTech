@@ -15,7 +15,7 @@
         android:textColor="#FFFFFF"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/bluetthbutn"
         android:layout_width="250sp"
         android:layout_height="250sp"
         android:layout_centerHorizontal="true"

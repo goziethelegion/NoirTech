@@ -16,7 +16,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="126dp"
         android:layout_marginStart="50dp"
-        android:text="Login" />
+        android:text="@string/login_app" />
 
     <Button
         android:id="@+id/signupbutton"
@@ -25,7 +25,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/loginbutton"
         android:layout_marginEnd="52dp"
-        android:text="Signup" />
+        android:text="@string/signup_app" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -43,7 +43,7 @@
         android:layout_above="@+id/signupbutton"
         android:layout_alignStart="@+id/imageView"
         android:layout_marginBottom="11dp"
-        android:text="The world from your lens"
+        android:text="@string/motto"
         android:textColor="#002FA7"
         android:textSize="20sp"
         android:textStyle="italic" />

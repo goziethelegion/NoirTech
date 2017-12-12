@@ -12,76 +12,59 @@
     <string name="tab_text_3">FACIAL/FINGERPRINT SCANNER</string>
     <string name="action_logout">Logout</string>
     <string name="title_activity_settings2">Settings</string>
+    <string name="motto">The world from your lens</string>
+    <string name="fname">First Name:</string>
+    <string name="lname">Last Name:</string>
+    <string name="usernamesgnup">Username:</string>
+    <string name="emailsgnup">Email:</string>
+    <string name="passwdsgnup">Password:</string>
+    <string name="confirsignup">Confirm Password:</string>
+    <string name="fnamehint">Enter First Name</string>
+    <string name="lnamehint">Enter Last Name</string>
+    <string name="usrnamehint">Enter Username</string>
+    <string name="emailhint">Enter email address</string>
+    <string name="passwdhint">Enter Password</string>
+    <string name="enterhint">Re-enter password</string>
+    <string name="nex">Next</string>
+    <string name="usrnamelogin">Username</string>
+    <string name="pass">Password</string>
+    <string name="forgot">Forgotten password?</string>
+    <string name="profile">View Profile</string>
+    <string name="send">Send</string>
+    <string name="user_profile">User Profile</string>
+    <string name="profile_update">Update Profile</string>
+    <string name="bluetooth">Bluetooth Settings</string>
+    <string name="updt">Update</string>
+    <string name="save">Save</string>
+    <string name="welcome">Welcome to GBMstats</string>
+    <string name="emailinvalid">Invalid Email</string>
+    <string name="entervalidemail">Please enter a valid email!</string>
+    <string name="close">Close</string>
+    <string name="website">http://partscribdatabase.tech/gbmstats/updateuser.php</string>
+    <string name="website1">http://partscribdatabase.tech/gbmstats/login.php</string>
+    <string name="website2">http://partscribdatabase.tech/gbmstats/registerstudent.php</string>
+    <string name="emailsent">Email Sent</string>
+    <string name="checkmail">Please check your email!</string>
+    <string name="wait">Please wait...</string>
+    <string name="errconnection">Error Connection.</string>
+    <string name="retry">Try again</string>
+    <string name="cancel">Cancel</string>
+    <string name="err">ERROR!</string>
+    <string name="retry1">Please try again</string>
+    <string name="apperror">Application Error</string>
+    <string name="cctv">CCTV</string>
+    <string name="selected">is selected</string>
+    <string name="empty">Empty Text Fields</string>
+    <string name="enterinfo">Please enter your information.</string>
+    <string name="okay">OK</string>
+    <string name="passinvalid">Invalid Password</string>
+    <string name="passmatch">Password and Confirm Password must match!</string>
+    <string name="passnumber">Password must be greater than 5 characters and less than 12 characters!</string>
+    <string name="signup">Signed up</string>
+    <string name="updated">Updated</string>
+    <string name="viewprofile">View User Profile</string>
+    <string name="about">About</string>
+    <string name="welcome1">Welcome</string>
+    <string name="bluetthset">Bluetooth Settings</string>
 
-    <!-- Strings related to Settings -->
-
-    <!-- Example General settings -->
-    <string name="pref_header_general">General</string>
-
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
-    </string>
-
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
-
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
-
-    <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
-
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
-
-    <string-array name="list_preference_entry_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="multi_select_list_preference_default_value" />
-
-    <string name="pref_title_system_sync_settings">System sync settings</string>
-
-    <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
-
-    <string name="pref_title_new_message_notifications">New message notifications</string>
-
-    <string name="pref_title_ringtone">Ringtone</string>
-    <string name="pref_ringtone_silent">Silent</string>
-
-    <string name="pref_title_vibrate">Vibrate</string>
 </resources>

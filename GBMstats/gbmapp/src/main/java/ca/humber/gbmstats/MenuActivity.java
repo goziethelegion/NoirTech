@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 //redundant activity
+//Was previously meant to be an interface for the admin
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -18,7 +19,7 @@ public class MenuActivity extends AppCompatActivity {
         buttonsettings = (Button) findViewById(R.id.settingsbutton);
         buttonsettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent settings = new Intent(MenuActivity.this, SettingsActivity.class);
+                Intent settings = new Intent(MenuActivity.this, FlashActivity.class);
                 startActivity(settings);
             }
         });

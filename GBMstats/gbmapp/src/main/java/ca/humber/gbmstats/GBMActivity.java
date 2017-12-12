@@ -1,4 +1,5 @@
 package ca.humber.gbmstats;
+//GBMstats
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -36,5 +37,12 @@ public class GBMActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gbm);
         Loginmethod();
         Signupmethod();
+
+        //checks if the user is already logged in
+        if(UserSessionManager.getInstance(this).isLoggedIn())
+        {
+            finish();
+            startActivity(new Intent(this, Menu2Activity.class));
+        }
     }
 }

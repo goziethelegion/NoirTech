@@ -14,7 +14,7 @@
         android:layout_alignBaseline="@+id/lname"
         android:layout_alignBottom="@+id/lname"
         android:layout_alignParentStart="true"
-        android:text="Last Name:"
+        android:text="@string/lname"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -26,7 +26,7 @@
         android:layout_above="@+id/editusername"
         android:layout_toEndOf="@+id/confirmtext"
         android:ems="10"
-        android:hint="Enter Last Name"
+        android:hint="@string/lnamehint"
         android:inputType="textPersonName"
         android:text=""
         android:textColor="#FFFFFF" />
@@ -38,7 +38,7 @@
         android:layout_alignBaseline="@+id/editusername"
         android:layout_alignBottom="@+id/editusername"
         android:layout_alignParentStart="true"
-        android:text="Username:"
+        android:text="@string/usernamesgnup"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -50,7 +50,7 @@
         android:layout_above="@+id/editemail"
         android:layout_alignStart="@+id/lname"
         android:ems="10"
-        android:hint="Enter Username"
+        android:hint="@string/usrnamehint"
         android:inputType="textPersonName"
         android:text=""
         android:textColor="#FFFFFF" />
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:text="Email:"
+        android:text="@string/emailsgnup"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -74,8 +74,8 @@
         android:layout_alignBottom="@+id/emailtext"
         android:layout_alignStart="@+id/editusername"
         android:ems="10"
-        android:hint="Enter email address"
-        android:inputType="textEmailAddress"
+        android:hint="@string/emailhint"
+        android:inputType="textEmailAddress|textWebEmailAddress"
         android:textColor="#FFFFFF" />
 
     <TextView
@@ -85,7 +85,7 @@
         android:layout_alignBaseline="@+id/editpasswd"
         android:layout_alignBottom="@+id/editpasswd"
         android:layout_alignParentStart="true"
-        android:text="Password:"
+        android:text="@string/passwdsgnup"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -97,7 +97,7 @@
         android:layout_alignStart="@+id/editemail"
         android:layout_below="@+id/editemail"
         android:ems="10"
-        android:hint="Enter Password"
+        android:hint="@string/passwdhint"
         android:inputType="textPersonName|textPassword"
         android:textColor="#FFFFFF" />
 
@@ -108,7 +108,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editpasswd"
         android:layout_marginTop="12dp"
-        android:text="Confirm Password:"
+        android:text="@string/confirsignup"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -120,7 +120,7 @@
         android:layout_alignEnd="@+id/editpasswd"
         android:layout_below="@+id/editpasswd"
         android:ems="10"
-        android:hint=" Re-enter password"
+        android:hint="@string/enterhint"
         android:inputType="textPersonName|textPassword"
         android:textColor="#FFFFFF" />
 
@@ -131,7 +131,7 @@
         android:layout_alignEnd="@+id/editconfirm"
         android:layout_below="@+id/editconfirm"
         android:layout_marginTop="14dp"
-        android:text="Next" />
+        android:text="@string/nex" />
 
     <TextView
         android:id="@+id/fname"
@@ -140,7 +140,7 @@
         android:layout_above="@+id/lname"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="12dp"
-        android:text="First Name:"
+        android:text="@string/fname"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -152,7 +152,7 @@
         android:layout_above="@+id/lname"
         android:layout_alignStart="@+id/lname"
         android:ems="10"
-        android:hint="Enter First Name"
+        android:hint="@string/fnamehint"
         android:inputType="textPersonName"
         android:text=""
         android:textColor="#FFFFFF" />
