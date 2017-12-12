@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ca.humber.gbmstats.MenuActivity"
+    android:background="#1A2421">
+
+    <Button
+        android:id="@+id/facialbutton"
+        android:layout_width="130sp"
+        android:layout_height="130sp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="63dp"
+        android:background="@mipmap/facial" />
+
+    <Button
+        android:id="@+id/statisticsbutton"
+        android:layout_width="130sp"
+        android:layout_height="130sp"
+        android:layout_alignStart="@+id/facialbutton"
+        android:layout_below="@+id/facialbutton"
+        android:background="@mipmap/weather" />
+
+    <Button
+        android:id="@+id/camerabutton"
+        android:layout_width="130sp"
+        android:layout_height="130sp"
+        android:layout_alignStart="@+id/statisticsbutton"
+        android:layout_below="@+id/statisticsbutton"
+        android:background="@mipmap/camera" />
+
+    <TextView
+        android:id="@+id/fscan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/statisticsbutton"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="13dp"
+        android:text="FINGERPRINT/FACIAL SCAN"
+        android:textColor="#002FA7"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/weatherstats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/camerabutton"
+        android:layout_alignStart="@+id/fscan"
+        android:layout_marginBottom="11dp"
+        android:text="WEATHER STATISTICS"
+        android:textColor="#002FA7"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/cctv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/camerabutton"
+        android:layout_alignStart="@+id/weatherstats"
+        android:layout_marginBottom="11dp"
+        android:text="VIEW CCTV"
+        android:textColor="#002FA7"
+        android:textSize="19sp" />
+
+    <Button
+        android:id="@+id/settingsbutton"
+        android:layout_width="60sp"
+        android:layout_height="60sp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:background="@mipmap/settings" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+</RelativeLayout>

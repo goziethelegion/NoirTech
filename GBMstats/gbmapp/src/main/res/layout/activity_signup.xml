@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ca.humber.gbmstats.SignupActivity"
+    android:background="#1A2421">
+
+    <TextView
+        android:id="@+id/nametext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lname"
+        android:layout_alignBottom="@+id/lname"
+        android:layout_alignParentStart="true"
+        android:text="@string/lname"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/lname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editusername"
+        android:layout_toEndOf="@+id/confirmtext"
+        android:ems="10"
+        android:hint="@string/lnamehint"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/usernametext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editusername"
+        android:layout_alignBottom="@+id/editusername"
+        android:layout_alignParentStart="true"
+        android:text="@string/usernamesgnup"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editusername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editemail"
+        android:layout_alignStart="@+id/lname"
+        android:ems="10"
+        android:hint="@string/usrnamehint"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/emailtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:text="@string/emailsgnup"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/emailtext"
+        android:layout_alignBottom="@+id/emailtext"
+        android:layout_alignStart="@+id/editusername"
+        android:ems="10"
+        android:hint="@string/emailhint"
+        android:inputType="textEmailAddress|textWebEmailAddress"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/passwdtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editpasswd"
+        android:layout_alignBottom="@+id/editpasswd"
+        android:layout_alignParentStart="true"
+        android:text="@string/passwdsgnup"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editpasswd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/editemail"
+        android:layout_below="@+id/editemail"
+        android:ems="10"
+        android:hint="@string/passwdhint"
+        android:inputType="textPersonName|textPassword"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/confirmtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editpasswd"
+        android:layout_marginTop="12dp"
+        android:text="@string/confirsignup"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editconfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editpasswd"
+        android:layout_below="@+id/editpasswd"
+        android:ems="10"
+        android:hint="@string/enterhint"
+        android:inputType="textPersonName|textPassword"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/nextbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editconfirm"
+        android:layout_below="@+id/editconfirm"
+        android:layout_marginTop="14dp"
+        android:text="@string/nex" />
+
+    <TextView
+        android:id="@+id/fname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lname"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp"
+        android:text="@string/fname"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/fname1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lname"
+        android:layout_alignStart="@+id/lname"
+        android:ems="10"
+        android:hint="@string/fnamehint"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textColor="#FFFFFF" />
+</RelativeLayout>

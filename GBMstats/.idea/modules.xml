@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GBMstats.iml" filepath="$PROJECT_DIR$/GBMstats.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gbmapp/gbmapp.iml" filepath="$PROJECT_DIR$/gbmapp/gbmapp.iml" />
     </modules>
   </component>
 </project>
