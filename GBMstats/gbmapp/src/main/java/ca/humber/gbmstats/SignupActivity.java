@@ -60,6 +60,7 @@ public class SignupActivity extends AppCompatActivity {
                 public void onClick(View view)
                 {
 
+                    //convert the texts to strings
                     lnam = lname.getText().toString();
                     fnam = fname1.getText().toString();
                     editemai = editemail.getText().toString();
@@ -67,6 +68,7 @@ public class SignupActivity extends AppCompatActivity {
                     editpassw = editpasswd.getText().toString();
                     editusernam = editusername.getText().toString();
 
+                    //validates if the text fields are empty
                     if (editusernam.equals("") && editpassw.equals("") && editconfir.equals("") &&
                             lnam.equals("") && fnam.equals("") && editemai.equals("")) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -81,6 +83,7 @@ public class SignupActivity extends AppCompatActivity {
                         alert.show();
                     }
                         else {
+                        //validates if the password and the confirm password are the same
                             if (!editpassw.equals(editconfir)) {
                                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
@@ -95,6 +98,7 @@ public class SignupActivity extends AppCompatActivity {
                                 AlertDialog alertDialog = alertDialogBuilder.create();
                                 alertDialog.show();
                             } else {
+                                //validates the length of the password the user entered
                                 if (!((editpassw.length() >= 6) && (editpassw.length() <= 12))) {
                                     AlertDialog.Builder alertDialogBuilder1 = new AlertDialog.Builder(context);
 
@@ -109,6 +113,7 @@ public class SignupActivity extends AppCompatActivity {
                                     AlertDialog alertDialog1 = alertDialogBuilder1.create();
                                     alertDialog1.show();
                                 } else {
+                                    //validates the email format
                                     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
                                     if (!editemai.matches(emailPattern)) {
                                         AlertDialog.Builder alertDialogBuilder2 = new AlertDialog.Builder(context);
@@ -137,6 +142,7 @@ public class SignupActivity extends AppCompatActivity {
     {
         String json_url;
         String JSON_STRING;
+        //used to access an activity
         Context ctx;
         AlertDialog.Builder builder;
         private Activity activity;
@@ -145,6 +151,7 @@ public class SignupActivity extends AppCompatActivity {
         //constructor
         public SignupBackgroundTasks(Context ctx)
         {
+            //used to access an activity
             this.ctx = ctx;
             activity = (Activity) ctx;
         }
@@ -156,12 +163,16 @@ public class SignupActivity extends AppCompatActivity {
         protected void onPreExecute()
         {
             builder = new AlertDialog.Builder(ctx);
+            //progressdialog layout to monitor connection progress
             View dialogView = LayoutInflater.from(this.ctx).inflate(R.layout.progressdialog, null);
             ((TextView) dialogView.findViewById(R.id.tprogressdialog)).setText(getString(R.string.wait));
             loginDialog = builder.setView(dialogView).setCancelable(false).show();
             json_url = getString(R.string.website2);
         }
 
+        //This is where the connection is established
+        //Data is sent to server and response is awaited
+        //Starts before the onPreExecute finishes its process
         @Override
         protected String doInBackground(String... params)
         {
@@ -175,6 +186,8 @@ public class SignupActivity extends AppCompatActivity {
                 OutputStream os = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
 
+                //assigning the values user entered for verification
+                //and saving the values in ASCII code format
                 String data =
                         URLEncoder.encode("username", "UTF-8") + "=" +
                                 URLEncoder.encode(editusernam, "UTF-8") + "&" +
@@ -187,6 +200,7 @@ public class SignupActivity extends AppCompatActivity {
                                 URLEncoder.encode("email", "UTF-8") + "=" +
                                 URLEncoder.encode(editemai, "UTF-8");
 
+                //write the user login for verification and then close
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -215,16 +229,19 @@ public class SignupActivity extends AppCompatActivity {
             return null;
         }
 
+        //could be used to monitor progress while doInBackground method is still running
         @Override
         protected void onProgressUpdate(Void... values)
         {
             super.onProgressUpdate(values);
         }
 
+        //This is implemented after execution
         @Override
         protected void onPostExecute(String result)
         {
             loginDialog.dismiss();
+            //Checks if there is an internet connection
             if(TextUtils.isEmpty(result))
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
@@ -248,6 +265,7 @@ public class SignupActivity extends AppCompatActivity {
                 AlertDialog alert = builder.create();
                 alert.show();
             }
+            //if there is a connection, then do the following
             else
             {
                 try
@@ -256,9 +274,11 @@ public class SignupActivity extends AppCompatActivity {
                     JSONArray jsonArray = jsonObject.getJSONArray("server_response");
                     JSONObject JO = jsonArray.getJSONObject(0);
 
+                    //Whether signup is successful or not, server will always return code and message
                     String message = JO.getString("message");
                     String code = JO.getString("code");
 
+                    //executes if user sign up is successful
                     if (code.equals("reg_true"))
                     {
                         AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
@@ -270,18 +290,23 @@ public class SignupActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which)
                             {
                                 dialog.dismiss();
+                                //after dialog is dismissed, the text fields are set to empty again
                                 editusername.setText("");
                                 editpasswd.setText("");
                                 fname1.setText("");
                                 lname.setText("");
                                 editemail.setText("");
                                 editconfirm.setText("");
+                                //signup activity is ended upon successful signup
+                                //and user is taken back to the previous activity(GBMstats activity)
                             finish();
                             }
                         });
                         AlertDialog alert = builder.create();
                         alert.show();
                     }
+                    //executed if user sign up isn't successful
+                    //that means something is wrong with text fields
                     else if (code.equals("reg_false"))
                     {
                         AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
@@ -308,7 +333,7 @@ public class SignupActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ctx);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
                         builder.setTitle(getString(R.string.err));
                         builder.setMessage(getString(R.string.retry1));
                         builder.setCancelable(false);
@@ -327,7 +352,7 @@ public class SignupActivity extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         });
-                        android.support.v7.app.AlertDialog alert = builder.create();
+                        AlertDialog alert = builder.create();
                         alert.show();
                     }
                 }

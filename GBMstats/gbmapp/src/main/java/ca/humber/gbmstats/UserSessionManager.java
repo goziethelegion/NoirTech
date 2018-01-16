@@ -13,6 +13,7 @@ import ca.humber.gbmstats.LoginActivity;
  * Created by Chigozie on 12/2/2017.
  */
 
+//class for sharedpreference
 public class UserSessionManager {
 
     private static final String SHARED_PREF_NAME = "simplifiedcodingsharedpref";

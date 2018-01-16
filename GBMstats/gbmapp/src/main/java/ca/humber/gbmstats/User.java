@@ -4,6 +4,7 @@ package ca.humber.gbmstats;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+//class to save user information based on the fields
 public class User {
 
     private String username, email, fname, lname;

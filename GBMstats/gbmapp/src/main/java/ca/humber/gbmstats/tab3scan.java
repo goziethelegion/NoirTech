@@ -26,6 +26,7 @@ public class tab3scan extends Fragment{
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab3scan, container, false);
 
+
         return rootView;
     }
 }

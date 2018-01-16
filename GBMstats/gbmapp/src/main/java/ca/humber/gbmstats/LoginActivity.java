@@ -77,9 +77,12 @@ public class LoginActivity extends AppCompatActivity {
         passwdtext = (EditText) findViewById(R.id.passwdtext);
     }
 
+    //Class using AsyncTask Thread to handle the UI thread while user is trying to
+    //perform the task of logging in
     class LoginBackgroundTasks extends AsyncTask<String, Void, String>{
         String json_url;
         String JSON_STRING;
+        //used to access an activity
         Context ctx;
         AlertDialog.Builder builder;
         private Activity activity;
@@ -90,15 +93,20 @@ public class LoginActivity extends AppCompatActivity {
             activity = (Activity) ctx;
         }
 
+        //This is first executed because it assigns the database url before connection is established
         @Override
         protected void onPreExecute(){
             builder = new AlertDialog.Builder(ctx);
+            //progressdialog layout to monitor connection progress
             View dialogView = LayoutInflater.from(this.ctx).inflate(R.layout.progressdialog, null);
             ((TextView) dialogView.findViewById(R.id.tprogressdialog)).setText(getString(R.string.wait));
             loginDialog = builder.setView(dialogView).setCancelable(false).show();
             json_url = getString(R.string.website1);
         }
 
+        //This is executed next
+        //This is where the information is sent to server
+        //Starts before the onPreExecute finishes its process
         @Override
         protected String doInBackground(String... params){
             try
@@ -111,12 +119,15 @@ public class LoginActivity extends AppCompatActivity {
                 OutputStream os = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
 
+                //assigning the values user entered for verification
+                //and saving the values in ASCII code format
                 String data =
                         URLEncoder.encode("username", "UTF-8") + "=" +
                                 URLEncoder.encode(usrnametex, "UTF-8") + "&" +
                                 URLEncoder.encode("password", "UTF-8") + "=" +
                                 URLEncoder.encode(passwdtex, "UTF-8");
 
+                //write the user login for verification and then close
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -145,14 +156,17 @@ public class LoginActivity extends AppCompatActivity {
             return null;
         }
 
+        //could be used to monitor progress while doInBackground method is still running
         @Override
         protected void onProgressUpdate(Void... values){
             super.onProgressUpdate(values);
         }
 
+        //This is implemented after execution
         @Override
         protected void onPostExecute(String result){
             loginDialog.dismiss();
+            //Checks if there is an internet connection
             if(TextUtils.isEmpty(result))
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
@@ -176,6 +190,7 @@ public class LoginActivity extends AppCompatActivity {
                 AlertDialog alert = builder.create();
                 alert.show();
             }
+            //if there is a connection, then do the following
             else
             {
                 try
@@ -208,9 +223,11 @@ public class LoginActivity extends AppCompatActivity {
                         {
                             // Server did not respond  with these values
                         }
+                    //executes if the login is successful
                     if (code.equals("login_true"))
                     {
                         int castedUserID = Integer.valueOf(user_id);
+                        //Creates a session for the logged in user to be saved in sharedpreference
                         User user = new User(castedUserID, firstname, username, email, lastname);
                         UserSessionManager.getInstance(ctx).userLogin(user);
 
@@ -220,6 +237,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else if (code.equals("login_false"))
                     {
+                        //executes if the credentials user entered is incorrect
                         AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
                         builder.setTitle(getString(R.string.err));
                         builder.setMessage(message);

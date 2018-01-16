@@ -27,6 +27,7 @@ private Button buttonpass;
         buttonpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //validates the email format
                 emai = email.getText().toString();
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
                 if (!emai.matches(emailPattern)) {
@@ -43,6 +44,7 @@ private Button buttonpass;
                 AlertDialog alertDialog2 = alertDialogBuilder2.create();
                 alertDialog2.show();
                 }
+                //Implemented if email is valid
                 else{
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
 

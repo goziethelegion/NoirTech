@@ -25,15 +25,19 @@ public class FlashActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash);
+        //This hides the action, preventing it from displaying
         actionBar = getSupportActionBar();
         actionBar.hide();
         te = (TextView)findViewById(R.id.te);
         im = (ImageView)findViewById(R.id.im);
+        //Animation for bouncing image which isn't currently working
         Animation manimation = AnimationUtils.loadAnimation(this, R.anim.mytransition);
         im.setVisibility(View.VISIBLE);
         te.startAnimation(manimation);
         im.startAnimation(manimation);
 
+        //scheduling the toast and runnables to be executed in 50 secs
+        // before launching GBMActivity
         new Handler().postDelayed(new Runnable()
         {
             @Override

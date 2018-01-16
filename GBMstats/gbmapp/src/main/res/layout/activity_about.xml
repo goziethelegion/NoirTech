@@ -7,4 +7,16 @@
     android:background="#1A2421"
     tools:context="ca.humber.gbmstats.AboutActivity">
 
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="320dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="154dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#FFFFFF"
+        android:text="@string/boutcontent" />
 </RelativeLayout>

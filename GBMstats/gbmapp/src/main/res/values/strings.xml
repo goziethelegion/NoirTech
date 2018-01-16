@@ -66,5 +66,28 @@
     <string name="about">About</string>
     <string name="welcome1">Welcome</string>
     <string name="bluetthset">Bluetooth Settings</string>
+    <string name="boutcontent">GBMstats is an application created
+        by Gozie Aham and Mykal Bailey from the Computer Engineering Technology program
+of Humber College. Inspiration came from security systems. GBMstats services should be
+used in accordance to the law and not with malicious intent.</string>
+    <string name="enable">Enable/Disable Bluetooth</string>
+    <string name="blthturnon">Bluetooth turning on</string>
+    <string name="onblth">Bluetooth on</string>
+    <string name="blthturnoff">Bluetooth turning off</string>
+    <string name="offblth">Bluetooth off</string>
+    <string name="discover">Enable Discoverable</string>
+    <string name="cctvset">CCTV Settings</string>
+    <string name="search">Search for new devices</string>
+    <string name="takepic">Take picture with picamera</string>
+    <string name="noneed">No need to check permissions</string>
+    <string name="threadstart">Discovery thread started...Scanning for devices</string>
+    <string name="start">Starting discovery for new devices</string>
+    <string name="progdisc">Discovery in Progress</string>
+    <string name="discenable">Discoverability Enabled</string>
+    <string name="discdisable">Discoverability Disabled, able to receive connections</string>
+    <string name="discdisable2">Discoverability Disabled, not able to receive connections</string>
+    <string name="connecting">Connecting...</string>
+    <string name="connected">Connected</string>
+    <string name="upload">Upload picture to database</string>
 
 </resources>

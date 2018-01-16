@@ -45,6 +45,7 @@ public class Menu2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu2);
 
+        //Sharedpreference to save the session for the logged in user
         User user = UserSessionManager.getInstance(this).getUser();
 
         textviewer = (TextView) findViewById(R.id.textviewer);
@@ -54,8 +55,10 @@ public class Menu2Activity extends AppCompatActivity {
         usrname = login2.getStringExtra("name");
         textviewer.setText(usrname);
 
+        //Initialising the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Disables the back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -88,13 +91,22 @@ public class Menu2Activity extends AppCompatActivity {
         int log = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        //if the settings is selected by the user then
+        //take user to the settings activity
         if (id == R.id.action_settings) {
             Intent sett = new Intent(Menu2Activity.this, SettingsActivity.class);
             startActivity(sett);
         }
 
+        if (id == R.id.action_about) {
+            Intent about = new Intent(Menu2Activity.this, AboutActivity.class);
+            startActivity(about);
+        }
+
+        //if the logout is selected by the user then
+        //clear the saved user session
         if (log == R.id.action_logout){
-            //new UserSessionManager(Menu2Activity.this).removeUser();
+            //ends the current activity before deleting the session
             finish();
             UserSessionManager.getInstance(getApplicationContext()).logout();
             Intent login = new Intent(this, LoginActivity.class);
@@ -111,16 +123,20 @@ public class Menu2Activity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        //Implementation of the FragmentPagerAdapter to handle/create the tabs
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
+
             switch (position){
+                //First tab in index 0 is assigned to tab1cctv fragment
                 case 0:
                     tab1cctv tab1 = new tab1cctv();
                     return tab1;
+                //Second tab in index 1 is assigned to tab3scan Fragment
                 case 1:
                     tab3scan tab3 = new tab3scan();
                     return tab3;

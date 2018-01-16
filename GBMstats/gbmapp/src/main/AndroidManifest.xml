@@ -6,11 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
     <uses-feature android:name="android.hardware.bluetooth" />
-
-    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <supports-screens
         android:largeScreens="true"
@@ -74,7 +72,11 @@
         <activity
             android:name=".BluetoothSettingsActivity"
             android:label="@string/bluetooth"
-            android:parentActivityName=".SettingsActivity"></activity>
+            android:parentActivityName=".SettingsActivity" />
+        <activity
+            android:name=".CCTVSettingsActivity"
+            android:label="@string/cctvset"
+            android:parentActivityName=".SettingsActivity"/>
     </application>
 
 </manifest>

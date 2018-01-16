@@ -60,5 +60,21 @@
     <string name="passnumber">Le mot de passe doit contenir plus de 5 caractères et moins de 12 caractères!</string>
     <string name="signup">Signé</string>
     <string name="updated">Actualisé</string>
+    <string name="viewprofile">Voir le profil de l\'utilisateur</string>
+    <string name="about">Sur</string>
+    <string name="welcome1">Bienvenue</string>
+    <string name="bluetthset">Paramètres Bluetooth</string>
+    <string name="boutcontent">GBMstats est une application créée
+par Gozie Aham et Mykal Bailey du programme de technologie de génie informatique
+du Collège Humber. L\'inspiration est venue des systèmes de sécurité. Les services GBMstats devraient être
+utilisé conformément à la loi et non avec une intention malveillante.</string>
+    <string name="enable">Activer / Désactiver Bluetooth</string>
+    <string name="blthturnon">Bluetooth allumé</string>
+    <string name="onblth">Bluetooth activé</string>
+    <string name="blthturnoff">Bluetooth s\'éteint</string>
+    <string name="offblth">Bluetooth désactivé</string>
+    <string name="discover">Activer Discoverable</string>
+    <string name="cctvset">Paramètres de vidéosurveillance</string>
+    <string name="search">Rechercher de nouveaux appareils</string>
 
 </resources>
